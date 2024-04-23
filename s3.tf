@@ -1,15 +1,14 @@
 #Creating S3 
 resource "aws_s3_bucket" "Project-S3" {
   bucket = var.bucket_name
-
-  versioning {
-    enabled = true
-  }
 }
 
-resource "aws_s3_bucket_acl" "Project_acl" {
+resource "aws_s3_bucket_versioning" "Bucket-version" {
   bucket = aws_s3_bucket.Project-S3.id
-  acl = "public-read"
+
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "Proj" {
